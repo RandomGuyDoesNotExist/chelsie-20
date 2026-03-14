@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Beloved!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Deeper Pinkish Pastel Palette */
+            --pastel-pink: #ffdae9;
+            --soft-pink: #ffb7d5;
+            --vibrant-pastel: #ffc2d4;
+            --hot-pink: #ff69b4;
+            --ribbon-color: #ff85a2;
+            --glass: rgba(255, 255, 255, 0.5);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--pastel-pink);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            /* More Pinkish Gradient */
+            background: linear-gradient(-45deg, #ffdae9, #ffb7d5, #ffe4e1, #ffc2d4);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
+        }
+
+        @keyframes gradientBG { 
+            0% {background-position: 0% 50%;} 
+            50% {background-position: 100% 50%;} 
+            100% {background-position: 0% 50%;} 
+        }
+
+        /* --- GEOMETRIC BACKGROUND (PINK THEMED) --- */
+        .circularBg {
+            position: fixed; width: 450px; height: 450px; top: 10%; left: -150px;
+            border-radius: 50%; background: var(--vibrant-pastel);
+            box-shadow: 0 12px 35px rgba(255, 105, 180, 0.15); z-index: -2; opacity: 0.7;
+        }
+        
+        .rectangleConnector1, .rectangleConnector2, .rectangleConnector3 {
+            position: fixed; width: 160px; height: 160px; 
+            background: var(--ribbon-color); box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            z-index: -2; border-radius: 25px; opacity: 0.4;
+        }
+        .rectangleConnector1 { top: 15%; left: 5%; animation: moveRight1 6s ease-in-out infinite alternate; }
+        .rectangleConnector2 { top: 60%; left: 80%; background: var(--hot-pink); animation: moveRight2 7s ease-in-out infinite alternate; }
+        .rectangleConnector3 { top: 85%; left: 15%; background: #ffcdd2; animation: moveRight1 8s ease-in-out infinite alternate-reverse; }
+
+        @keyframes moveRight1 { from { transform: translateX(0); } to { transform: translateX(60px); } }
+        @keyframes moveRight2 { from { transform: translateX(0); } to { transform: translateX(-80px); } }
+
+        /* --- FLOATING EMOJIS (HIGH FLOAT) --- */
+        .floating-emoji {
+            position: fixed; pointer-events: none; z-index: -1;
+            /* High-travel animation */
+            animation: riseHigh 12s linear infinite; opacity: 0;
+        }
+
+        @keyframes riseHigh {
+            0% { transform: translateY(110vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-120vh) translateX(100px) rotate(720deg); opacity: 0; }
+        }
+
+        /* --- FLOATING LOCKETS --- */
+        .locket {
+            position: fixed; border-radius: 50%; border: 6px solid white;
+            box-shadow: 0 12px 30px rgba(255, 105, 180, 0.2); overflow: hidden;
+            z-index: 1; pointer-events: none;
+        }
+        .locket img { width: 100%; height: 100%; object-fit: cover; }
+        .l1 { width: 140px; height: 140px; animation: drift 20s infinite; }
+        .l2 { width: 100px; height: 100px; animation: drift 25s infinite reverse; }
+
+        @keyframes drift {
+            0% { transform: translate(0,0) rotate(0deg); }
+            50% { transform: translate(75vw, 45vh) rotate(180deg); }
+            100% { transform: translate(5vw, 75vh) rotate(360deg); }
+        }
+
+        /* --- PORTRAIT CAROUSEL --- */
+        .carousel-viewbox { width: 100%; max-width: 1000px; margin: 40px auto; overflow: hidden; }
+        .carousel-track {
+            display: flex; gap: 25px; animation: portraitSlide 35s infinite ease-in-out;
+            padding-left: calc(50% - 140px);
+        }
+        .carousel-slide {
+            flex: 0 0 280px; height: 480px; border-radius: 20px;
+            overflow: hidden; border: 6px solid white; box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        .carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+
+        @keyframes portraitSlide {
+            0%, 10% { transform: translateX(0); }
+            15%, 25% { transform: translateX(-305px); }
+            30%, 40% { transform: translateX(-610px); }
+            45%, 55% { transform: translateX(-915px); }
+            60%, 70% { transform: translateX(-1220px); }
+            75%, 85% { transform: translateX(-1525px); }
+            100% { transform: translateX(0); }
+        }
+
+        /* --- REACTIVE BOXES --- */
+        .reactive {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+        .reactive:hover {
+            transform: scale(1.08);
+            text-shadow: 0 0 20px var(--hot-pink);
+        }
+
+        .message-box {
+            background: var(--glass); backdrop-filter: blur(15px);
+            padding: 45px; border-radius: 35px; border: 2px solid white;
+            transition: all 0.5s ease; margin-top: 25px;
+        }
+        .message-box:hover {
+            transform: scale(1.04);
+            box-shadow: 0 0 40px rgba(255, 105, 180, 0.6);
+        }
+
+        /* --- HEART BURST --- */
+        .burst-heart {
+            position: absolute; pointer-events: none;
+            z-index: 9999; animation: burst 1s ease-out forwards;
+        }
+        @keyframes burst {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(2); opacity: 0; }
+        }
+
+        #intro-overlay {
+            position: fixed; inset: 0; background: var(--pastel-pink);
+            z-index: 1000; display: flex; justify-content: center; align-items: center;
+        }
+        .ribbon-btn {
+            background: var(--hot-pink); color: white; padding: 18px 50px;
+            border: none; border-radius: 60px; font-family: 'Dancing Script', cursive;
+            font-size: 2.4rem; cursor: pointer; box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+        }
+        .container { max-width: 850px; margin: 0 auto; padding: 80px 20px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div id="intro-overlay">
+        <button class="ribbon-btn" onclick="startApp()">🎀 Open 🎀</button>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="https://orangefreesounds.com/wp-content/uploads/2014/11/Happy-birthday-piano-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="circularBg"></div>
+    <div class="rectangleConnector1"></div>
+    <div class="rectangleConnector2"></div>
+    <div class="rectangleConnector3"></div>
+
+    <div class="locket l1"><img src="circle1.jpg"></div>
+    <div class="locket l2"><img src="circle2.jpg"></div>
+
+    <div class="container">
+        <header>
+            <h1 class="reactive" onclick="heartBurst(event)" style="font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 12vw, 5rem); color: var(--hot-pink);">Happy Birthday My Beloved Cutest Baby Chelsie!!</h1>
+            <p class="reactive" onclick="heartBurst(event)" style="font-weight: bold; color: var(--hot-pink); letter-spacing: 1px;">
+                ✨ Happy 20th Birthday my love, more memories and growth to come ✨
+            </p>
+        </header>
+
+        <div class="carousel-viewbox">
+            <div class="carousel-track">
+                <div class="carousel-slide"><img src="c1.jpg"></div>
+                <div class="carousel-slide"><img src="c2.jpg"></div>
+                <div class="carousel-slide"><img src="c3.jpg"></div>
+                <div class="carousel-slide"><img src="c4.jpg"></div>
+                <div class="carousel-slide"><img src="c5.jpg"></div>
+                <div class="carousel-slide"><img src="me and chelsie skytech6.jpg"></div>
+                <div class="carousel-slide"><img src="c7.jpeg"></div>
+            </div>
+        </div>
+
+        <div class="message-box reactive" onclick="heartBurst(event)">
+            <p style="font-size: 1.1rem; line-height: 1.8;">Dearest Loving Baby Chelsie,<br><br>
+            Happy 20th Birthday my love! Im so grateful for your presence in my life. We part ways with the time of our enjoyed youth but that doesnt mean that fun things can't continue! Your long and eventful journey had just begun. May life ahead be filled with joy, love, and endless wisdom that will keep yourself humble but a better person each and every day. We are both adults now and we should be responsible, I love you very much and I wish you the happiest things in life my love!
+        May you be granted a good health and an unyielding spirit to walk further through life! </p>
+            <h2 style="font-family: 'Dancing Script', cursive; margin-top: 30px; color: var(--hot-pink); font-size: 2rem;">Forever Yours, Zion</h2>
+        </div>
+    </div>
+
+    <script>
+        function startApp() {
+            document.getElementById('intro-overlay').style.opacity = '0';
+            setTimeout(() => document.getElementById('intro-overlay').style.display = 'none', 1000);
+            document.getElementById('bgMusic').play();
+            
+            // High-float Background Emojis
+            setInterval(spawnEmoji, 350);
+        }
+
+        function spawnEmoji() {
+            const emojis = ['❤️', '💖', '🌸', '✨', '🌼', '🎂', '💗', '🧸', '🍭', '🌹'];
+            const e = document.createElement('div');
+            e.className = 'floating-emoji';
+            e.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            e.style.left = Math.random() * 100 + 'vw';
+            e.style.fontSize = (Math.random() * 25 + 20) + 'px';
+            e.style.animationDuration = (Math.random() * 6 + 8) + 's';
+            document.body.appendChild(e);
+            setTimeout(() => e.remove(), 14000);
+        }
+
+        function heartBurst(event) {
+            const burstCount = 10;
+            for (let i = 0; i < burstCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'burst-heart';
+                heart.innerHTML = ['❤️', '💖', '💗'][Math.floor(Math.random()*3)];
+                heart.style.left = event.pageX + 'px';
+                heart.style.top = event.pageY + 'px';
+                
+                const tx = (Math.random() - 0.5) * 400 + 'px';
+                const ty = (Math.random() - 0.5) * 400 + 'px';
+                heart.style.setProperty('--tx', tx);
+                heart.style.setProperty('--ty', ty);
+                
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 1000);
+            }
+        }
+    </script>
+</body>
+</html>
